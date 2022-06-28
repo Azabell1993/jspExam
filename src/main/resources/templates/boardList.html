@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>게시판 목록 보기</h1>
+<h3><span th:text="${session.member.name}"></span>님 반갑습니다.</h3>
+<a th:href="@{/logOut}">로그아웃</a>
+<table border="1" >
+	<tr>
+		<th>번호</th>
+		<th>제목</th>
+		<th>작성자</th>
+		<th>등록일</th>
+		<th>조회수</th>
+	</tr>
+	<tr th:each="board : ${list}">
+		<td th:text="${board.seq}">번호내용</td>
+		<td><a href="#" th:href="@{/getBoard(seq=${board.seq})}" th:text=${board.title}>제목내용</a></td>
+		<td th:text="${board.writer}">작성자내용</td>
+		<td th:text="${#dates.format(board.createDate, 'yyyy-MM-dd')}">등록일내용</td>
+		<td th:text="${board.cnt}">조회수내용</td>
+	</tr>
+</table>
+<hr />
+<a href="/insertBoard">새글 등록</a>
+<!-- 
+<p>[[${testChar}]]</p>
+
+
+<script th:inline="javascript">
+    
+    /*<![CDATA[*/
+    
+    var message = [[${testChar}]];
+    console.log("컨트롤러에서 넘겨받은 자료 : " + message +"를 필요한 태그를 생성해서 값으로 넣어줄 수 있다.");
+    
+    /*]]>*/
+    
+</script>
+ -->
+</body>
+</html>
