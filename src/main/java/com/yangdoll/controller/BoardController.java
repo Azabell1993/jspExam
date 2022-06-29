@@ -2,12 +2,15 @@ package com.yangdoll.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.yangdoll.domain.Board;
+import com.yangdoll.exception.BoardException;
 import com.yangdoll.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,7 +23,8 @@ public class BoardController {
 	private final BoardService service;
 	
 	@GetMapping("boardList")
-	public String boardList(Model model) {
+	public String boardList(Model model, HttpSession sess) {
+		if(sess.getAttribute("member")==null) throw new BoardException("권한이 없습니다.");
 		List<Board> list = service.boardList();
 		model.addAttribute("list", list);
 		model.addAttribute("testChar", "이내용이 나올까요?");

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<body>
+<h1>보드 익셉션이 발생했을 때 이 화면이 브라우저에 나옵니다.</h1>
+<a th:href="@{/}"></a>
+
+<h3>예외 메세지 ===============> [[${exception.message}]] </h3>
+<h4>상세 내역 보기 개발 단계에서 문제 추적을 위해 아래 부분을 작성</h4>
+
+<div th:each="trace :${exception.stakTrace}"> 
+	<p th:text = "${trace}"></p>
+</div>
+
+</body>
+</head>
+</html>
